@@ -1,12 +1,14 @@
 package com.werewolf;
 
 import com.badlogic.gdx.Screen;
+import com.network.Client;
 
 /** First screen of the application. Displayed after the application is created. */
 public class MainScreen implements Screen {
     @Override
     public void show() {
         // Prepare your screen here.
+        Client client = new Client();
     }
 
     @Override
