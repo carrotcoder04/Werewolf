@@ -4,6 +4,8 @@ import com.config.Config;
 import com.config.ServerConfig;
 import com.message.io.MessageReader;
 import com.message.io.MessageWriter;
+import com.message.structure.MessageStructure;
+import com.message.structure.StringMessage;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,9 +46,11 @@ public class Client {
     }
     private void receiveMessage(byte[] data) {
         MessageReader reader = new MessageReader(data);
+        receiveMessage(reader);
     }
     private void receiveMessage(MessageReader reader) {
-
+        StringMessage message = new StringMessage(reader);
+        send(message);
     }
     private void disconnect() {
         try {
@@ -67,5 +71,24 @@ public class Client {
         catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    private void send(byte[] data) {
+        try {
+            out.write(data);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void send(MessageWriter message) {
+        send(message.getBuffer());
+    }
+    public void send(MessageStructure message) {
+        send(message.getWriter());
+    }
+    public void sendAsync(MessageStructure message) {
+        CompletableFuture.runAsync(() -> {
+            send(message);
+        });
     }
 }
