@@ -1,11 +1,13 @@
 package com.network;
 
-import com.config.Config;
-import com.config.ServerConfig;
+import com.config.network.NetworkConfig;
+import event.interfaces.Event;
+import event.listener.EventListener;
 import com.message.io.MessageReader;
 import com.message.io.MessageWriter;
-import com.message.structure.MessageStructure;
-import com.message.structure.StringMessage;
+import com.clientstate.state.ClientState;
+import com.clientstate.handler.ClientMessageHandler;
+import com.message.data.Message;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,20 +16,29 @@ import java.net.Socket;
 import java.util.Arrays;
 import java.util.concurrent.CompletableFuture;
 
+
 public class Client {
     private Socket socket;
     private InputStream in;
     private OutputStream out;
+    private EventListener<Client> onDisconnectedEvents;
+    private ClientState clientState;
+    private ClientMessageHandler stateHandler;
     public Client() {
+
+    }
+    public void connect() {
         try {
-            ServerConfig serverConfig = Config.getServerConfig();
-            socket = new Socket(serverConfig.getIpAddress(),serverConfig.getPort());
+            socket = new Socket(NetworkConfig.IP_SERVER,NetworkConfig.PORT );
             in = socket.getInputStream();
             out = socket.getOutputStream();
+            onDisconnectedEvents = new EventListener<>();
             CompletableFuture.runAsync(this::readLoop);
+            setClientState(ClientState.CLIENT_CONNECTED);
         }
         catch (IOException e) {
             e.printStackTrace();
+            disconnect();
         }
     }
     private void readLoop() {
@@ -39,6 +50,7 @@ public class Client {
                 receiveMessage(data);
             }
             catch (IOException e) {
+                // e.printStackTrace();
                 disconnect();
                 break;
             }
@@ -49,8 +61,10 @@ public class Client {
         receiveMessage(reader);
     }
     private void receiveMessage(MessageReader reader) {
-        StringMessage message = new StringMessage(reader);
-        send(message);
+        if(stateHandler != null) {
+            byte tag = reader.readTag();
+            stateHandler.onMessage(this,tag,reader);
+        }
     }
     private void disconnect() {
         try {
@@ -71,6 +85,10 @@ public class Client {
         catch (IOException e) {
             e.printStackTrace();
         }
+        onDisconnectedEvents.invoke(this);
+    }
+    public void addEventOnDisconnected(Event<Client> event) {
+        onDisconnectedEvents.addEvent(event);
     }
     private void send(byte[] data) {
         try {
@@ -83,12 +101,20 @@ public class Client {
     private void send(MessageWriter message) {
         send(message.getBuffer());
     }
-    public void send(MessageStructure message) {
+    public void send(Message message) {
         send(message.getWriter());
     }
-    public void sendAsync(MessageStructure message) {
+    public void sendAsync(Message message) {
         CompletableFuture.runAsync(() -> {
             send(message);
         });
+    }
+    public void setClientState(ClientState clientState) {
+        this.clientState = clientState;
+        if(stateHandler != null) {
+            stateHandler.onExit(this);
+        }
+        stateHandler = ClientMessageHandler.getStateHandler(clientState);
+        stateHandler.onEnter(this);
     }
 }
