@@ -1,8 +1,6 @@
 package com.network;
 
 import com.config.network.NetworkConfig;
-import event.interfaces.Event;
-import event.listener.EventListener;
 import com.message.io.MessageReader;
 import com.message.io.MessageWriter;
 import com.clientstate.state.ClientState;
@@ -21,18 +19,15 @@ public class Client {
     private Socket socket;
     private InputStream in;
     private OutputStream out;
-    private EventListener<Client> onDisconnectedEvents;
     private ClientState clientState;
     private ClientMessageHandler stateHandler;
     public Client() {
-
     }
     public void connect() {
         try {
             socket = new Socket(NetworkConfig.IP_SERVER,NetworkConfig.PORT );
             in = socket.getInputStream();
             out = socket.getOutputStream();
-            onDisconnectedEvents = new EventListener<>();
             CompletableFuture.runAsync(this::readLoop);
             setClientState(ClientState.CLIENT_CONNECTED);
         }
@@ -85,11 +80,8 @@ public class Client {
         catch (IOException e) {
             e.printStackTrace();
         }
-        onDisconnectedEvents.invoke(this);
     }
-    public void addEventOnDisconnected(Event<Client> event) {
-        onDisconnectedEvents.addEvent(event);
-    }
+
     private void send(byte[] data) {
         try {
             out.write(data);

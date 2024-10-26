@@ -1,25 +1,25 @@
-package event.listener;
+package com.event.listener;
 
-import event.interfaces.Event;
+import com.event.interfaces.Function;
 
 import java.util.ArrayList;
 
-public class EventListener<T> {
-    private final ArrayList<Event<T>> eventList;
+public class EventListener<T,V> {
+    private final ArrayList<Function<T,V>> eventList;
     public EventListener() {
         eventList = new ArrayList<>();
     }
-    public void addEvent(Event<T> event) {
+    public void addEvent(Function<T,V> event) {
         eventList.add(event);
     }
-    public void removeEvent(Event<T> event) {
+    public void removeEvent(Function<T,V> event) {
         eventList.remove(event);
     }
     public void clearEventList() {
         eventList.clear();
     }
-    public void invoke(T arg) {
-        for (Event<T> event : eventList) {
+    public void invoke(V arg) {
+        for (Function<T,V> event : eventList) {
             event.invoke(arg);
         }
     }
