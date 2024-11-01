@@ -11,7 +11,7 @@ import com.constant.Constants;
 import java.util.HashMap;
 
 public class ResourcesManager {
-    private static final HashMap<String,Texture> textures;
+    private static final HashMap<String,Texture2D> textures;
     private static final HashMap<String,Skin> skins;
     private static final HashMap<String, BitmapFont> fonts;
     private static final Pixmap onePixelPixmap;
@@ -26,12 +26,16 @@ public class ResourcesManager {
         onePixelPixmap.fill();
         onePixelTexture = new Texture(onePixelPixmap);
     }
-    public static Texture getTexture(String path) {
+    public static Texture2D getTexture(String path) {
         if (!textures.containsKey(path)) {
-            Texture texture = new Texture(Gdx.files.internal(path));
+            Texture2D texture = new Texture2D(Gdx.files.internal(path));
+            texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
             textures.put(path, texture);
         }
         return textures.get(path);
+    }
+    public static void removeTexture(String path) {
+        textures.remove(path);
     }
     public static Skin getSkin(String path) {
         if (!skins.containsKey(path)) {
@@ -55,13 +59,37 @@ public class ResourcesManager {
         return onePixelTexture;
     }
     public static void dispose() {
-        for (Texture texture : textures.values()) {
-            texture.dispose();
+        try {
+            for (Texture2D texture : textures.values()) {
+                try {
+                    texture.dispose();
+                }
+                catch (Exception ignored) {
+                }
+            }
+            for (Skin skin : skins.values()) {
+                try {
+                    skin.dispose();
+                }
+                catch (Exception ignored) {
+
+                }
+            }
         }
-        for (Skin skin : skins.values()) {
-            skin.dispose();
+        catch (Exception ignored) {
+
         }
-        onePixelTexture.dispose();
-        onePixelPixmap.dispose();
+        try {
+            onePixelPixmap.dispose();
+        }
+        catch (Exception ignored) {
+
+        }
+        try {
+            onePixelTexture.dispose();
+        }
+        catch (Exception ignored) {
+
+        }
     }
 }

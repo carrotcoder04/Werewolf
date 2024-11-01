@@ -1,6 +1,6 @@
 package com.message.io;
 
-import com.config.network.NetworkConfig;
+import com.config.NetworkConfig;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;

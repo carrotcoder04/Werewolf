@@ -3,8 +3,9 @@ package com.werewolf;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.resources.ResourcesManager;
-import com.screen.SplashScreen;
+import com.werewolf.screen.InfoUserScreen;
 import com.tween.TweenController;
+import com.werewolf.screen.SplashScreen;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class MainGame extends Game {
@@ -15,13 +16,13 @@ public class MainGame extends Game {
     @Override
     public void create() {
         setScreen(new SplashScreen());
-
     }
     @Override
     public void render() {
         TweenController.update(Gdx.graphics.getDeltaTime());
         super.render();
     }
+
     public static MainGame getInstance() {
         return instance;
     }

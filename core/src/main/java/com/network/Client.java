@@ -1,10 +1,10 @@
 package com.network;
 
-import com.config.network.NetworkConfig;
+import com.config.NetworkConfig;
 import com.message.io.MessageReader;
 import com.message.io.MessageWriter;
-import com.clientstate.state.ClientState;
-import com.clientstate.handler.ClientMessageHandler;
+import com.network.clientstate.state.ClientState;
+import com.network.clientstate.handler.ClientMessageHandler;
 import com.message.data.Message;
 
 import java.io.IOException;
