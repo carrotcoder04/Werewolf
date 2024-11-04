@@ -1,14 +1,14 @@
 
-button_role.png
+button_play.png
 size: 1024, 1024
 format: RGBA8888
 filter: Linear, Linear
 repeat: none
-BG_button_role
+button
   rotate: false
   xy: 1, 1
-  size: 130, 36
-  orig: 130, 36
+  size: 120, 36
+  orig: 120, 36
   offset: 0, 0
   index: -1
 SJ  CCRichardStarkings

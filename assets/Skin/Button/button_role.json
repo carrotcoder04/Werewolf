@@ -16,8 +16,8 @@ com.badlogic.gdx.graphics.Color: {
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
-	BG_button_role_down: {
-		name: BG_button_role
+	down: {
+		name: button
 		color: {
 			r: 0.8627451
 			g: 0.8627451
@@ -29,9 +29,9 @@ com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
 com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	default: {
 		font: SJ__CCRichardStarkings
-		fontColor: RGBA_10_37_93_255
-		up: BG_button_role
-		down: BG_button_role_down
+		fontColor: RGBA_10_37_93_255,
+		up: button,
+		down: down
 	}
 }
 }

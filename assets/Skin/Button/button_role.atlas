@@ -1,14 +1,14 @@
 
-button-field.png
+button_role.png
 size: 1024, 1024
 format: RGBA8888
 filter: Linear, Linear
 repeat: none
-Button
+button
   rotate: false
   xy: 1, 1
-  size: 120, 36
-  orig: 120, 36
+  size: 130, 36
+  orig: 130, 36
   offset: 0, 0
   index: -1
 SJ  CCRichardStarkings

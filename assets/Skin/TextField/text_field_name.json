@@ -28,8 +28,8 @@ com.badlogic.gdx.graphics.Color: {
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
-	Text_field_name_transparent: {
-		name: Text_field_name
+	background: {
+		name: text_field,
 		color: {
 			r: 1
 			g: 1
@@ -38,13 +38,13 @@ com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
 		}
 	}
 	cursor: {
-		name: white-pixel
+		name: white_pixel
 		color: RGBA_255_255_255_255
 		minWidth: 1
 		minHeight: 1
 	}
 	selection: {
-		name: white-pixel
+		name: white_pixel
 		color: RGBA_134_226_194_255
 		minWidth: 1
 		minHeight: 1
@@ -53,8 +53,8 @@ com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
 com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
 	default: {
 		font: Roboto-medium
-		fontColor: RGBA_255_255_255_255
-		background: Text_field_name_transparent,
+		fontColor: RGBA_255_255_255_255,
+		background: background,
 		cursor: cursor,
 		selection: selection
 		messageFont: Roboto-medium

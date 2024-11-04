@@ -76,7 +76,7 @@ public class InfoUserScreen implements Screen {
         stage.addActor(nameField);
     }
     private void initPlayButton() {
-        Skin skin = ResourcesManager.getSkin(FilePaths.TEXT_BUTTON_SKIN);
+        Skin skin = ResourcesManager.getSkin(FilePaths.BUTTON_PLAY);
         playButton = new TextButton("Play",skin);
         playButton.setPosition(GameConfig.SCREEN_WIDTH/2+110, GameConfig.SCREEN_HEIGHT-100,Align.center);
         playButton.addListener(new ClickListener() {
@@ -89,7 +89,7 @@ public class InfoUserScreen implements Screen {
         stage.addActor(playButton);
     }
     private void initRoleButton() {
-        Skin skin = ResourcesManager.getSkin(FilePaths.TEXT_BUTTON_ROLE_SKIN);
+        Skin skin = ResourcesManager.getSkin(FilePaths.BUTTON_ROLE);
         roleButton = new TextButton("Vai trò",skin);
         roleButton.setPosition(80, GameConfig.SCREEN_HEIGHT-40,Align.center);
         roleButton.addListener(new ClickListener() {

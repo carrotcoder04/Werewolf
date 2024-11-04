@@ -16,8 +16,8 @@ com.badlogic.gdx.graphics.Color: {
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
-	Button_down: {
-		name: Button
+	down: {
+		name: button
 		color: {
 			r: 0.88235295
 			g: 0.8745098
@@ -27,8 +27,8 @@ com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
 	}
 }
 com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
-    Button_disable: {
-      name: Button
+    disable: {
+      name: button
       color: {
         r: 0.749
         g: 0.749
@@ -41,9 +41,9 @@ com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 	default: {
 		font: SJ__CCRichardStarkings
 		overFontColor: RGBA_183_253_235_255
-		up: Button
-		down: Button_down
-		disabled: Button_disable
+		up: button
+		down: down
+		disabled: disable
 	}
 }
 }
