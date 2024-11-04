@@ -1,0 +1,37 @@
+{
+com.badlogic.gdx.graphics.g2d.BitmapFont: {
+	SJ__CCRichardStarkings: {
+		file: SJ  CCRichardStarkings.fnt
+		scaledSize: -1
+		markupEnabled: false
+		flip: false
+	}
+}
+com.badlogic.gdx.graphics.Color: {
+	RGBA_10_37_93_255: {
+		r: 0.039215688
+		g: 0.14509805
+		b: 0.3647059
+		a: 1
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
+	BG_button_role_down: {
+		name: BG_button_role
+		color: {
+			r: 0.8627451
+			g: 0.8627451
+			b: 0.8627451
+			a: 1
+		}
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+	default: {
+		font: SJ__CCRichardStarkings
+		fontColor: RGBA_10_37_93_255
+		up: BG_button_role
+		down: BG_button_role_down
+	}
+}
+}

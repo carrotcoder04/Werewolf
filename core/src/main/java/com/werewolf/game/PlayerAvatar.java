@@ -1,6 +1,5 @@
 package com.werewolf.game;
 
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Align;
@@ -38,7 +37,6 @@ public class PlayerAvatar implements Disposable {
         this.items = items;
         refreshSkin();
     }
-
     public Group getRoot() {
         return root;
     }

@@ -72,7 +72,7 @@ public class InventoryItem  {
         return type;
     }
     public Item getItemAvatar() {
-        String path =imagePath.replace("store.","avatar_small.");
+        String path = imagePath.replace("store.","avatar_small.");
         Image image = new Image(ResourcesManager.getTexture(path));
         return new Item(image,type);
     }

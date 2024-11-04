@@ -10,33 +10,34 @@ import com.badlogic.gdx.graphics.PixmapIO;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import jdk.jfr.events.CertificateId;
 
 public class TestScreen implements Screen {
     private Texture texture;
     private SpriteBatch batch;
-    Color c = new Color(224f/255f, 224f/255f, 224f/255f, 1);
-    Color d = new Color(151/255f, 151/255f, 151/255f, 1);
+    Color c = new Color(240f/255f, 240/255f, 240/255f, 1);
+    Color d = new Color(140/255f, 140/255f, 140/255f, 1f);
     Sprite sprite;
     boolean on = false;
 
     @Override
     public void show() {
         batch = new SpriteBatch();
-        int width = 133;
-        int height = 106;
-        int cornerRadius = 16;
-        int borderThickness = 3;
+        int width = 200;
+        int height = 50;
+        int cornerRadius = 24;
+        int borderThickness = 0;
         Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
 
         // Bước 2: Đổ màu nền trong suốt
 //        pixmap.setColor(0, 0, 0, 0);
-        pixmap.setColor(d);
-        pixmap.fillCircle(cornerRadius, cornerRadius, cornerRadius);
-        pixmap.fillCircle(width - cornerRadius-1, cornerRadius, cornerRadius);
-        pixmap.fillCircle(cornerRadius, height - cornerRadius-1, cornerRadius);
-        pixmap.fillCircle(width - cornerRadius-1, height - cornerRadius-1, cornerRadius);
+//        pixmap.setColor(d);
+//        pixmap.fillCircle(cornerRadius, cornerRadius, cornerRadius);
+//        pixmap.fillCircle(width - cornerRadius-1, cornerRadius, cornerRadius);
+//        pixmap.fillCircle(cornerRadius, height - cornerRadius-1, cornerRadius);
+//        pixmap.fillCircle(width - cornerRadius-1, height - cornerRadius-1, cornerRadius);
 
 
         // Bước 3: Đổ màu cho hình chữ nhật
@@ -50,28 +51,28 @@ public class TestScreen implements Screen {
         pixmap.fillCircle(width - cornerRadius-1, cornerRadius, cornerRadius-borderThickness);
         pixmap.fillCircle(cornerRadius, height - cornerRadius-1, cornerRadius-borderThickness);
         pixmap.fillCircle(width - cornerRadius-1, height - cornerRadius-1, cornerRadius-borderThickness);
-
-        pixmap.setColor(d);
-        for(int i=0;i<borderThickness;i++) {
-            pixmap.drawLine(cornerRadius, i, width - cornerRadius, i);
-            pixmap.drawLine(cornerRadius, height-i-1, width - cornerRadius, height-i-1);
-            pixmap.drawLine(i, cornerRadius,i , height - cornerRadius-1);
-            pixmap.drawLine(width - i-1, cornerRadius,width - i-1 , height - cornerRadius-1);
-        }
-//         Chuyển Pixmap thành Texture để sử dụng trong game
-        FileHandle fileHandle = Gdx.files.absolute("C:\\Users\\ASUS\\Desktop\\FolderManager\\JavaGame\\Werewolf\\assets\\Item\\item_background.png");
+//
+//        pixmap.setColor(d);
+//        for(int i=0;i<borderThickness;i++) {
+//            pixmap.drawLine(cornerRadius, i, width - cornerRadius, i);
+//            pixmap.drawLine(cornerRadius, height-i-1, width - cornerRadius, height-i-1);
+//            pixmap.drawLine(i, cornerRadius,i , height - cornerRadius-1);
+//            pixmap.drawLine(width - i-1, cornerRadius,width - i-1 , height - cornerRadius-1);
+//        }
+////         Chuyển Pixmap thành Texture để sử dụng trong game
+        FileHandle fileHandle = Gdx.files.absolute("C:\\Users\\ASUS\\Desktop\\FolderManager\\JavaGame\\Werewolf\\assets\\background_text_field_name.png");
         PixmapIO.writePNG(fileHandle, pixmap);
 
 
 
         texture = new Texture(pixmap);
         sprite = new Sprite(texture);
-        sprite.setPosition(550 / 2, 800 / 2);
+        sprite.setPosition(550 / 2-width/2, 800 / 2);
     }
 
     @Override
     public void render(float v) {
-        ScreenUtils.clear(1, 1, 1, 1);
+        ScreenUtils.clear(0, 1, 1, 1);
         if(Gdx.input.isKeyJustPressed(Input.Keys.A)) {
             if(!on) {
                 sprite.setColor(Color.GREEN);

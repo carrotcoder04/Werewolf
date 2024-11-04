@@ -18,26 +18,36 @@ import java.util.ArrayList;
 
 public class Inventory implements Disposable {
 
-    private final ArrayList<Tab> tabs;
+    private ArrayList<Tab> tabs;
     private Tab selectedTab;
     private final Group mainGroup;
     private static Inventory instance;
-    private final PlayerAvatar playerAvatar;
-    private final Table tabTable;
+    private PlayerAvatar playerAvatar;
+    private Table tabTable;
     public Inventory(Group mainGroup) {
         instance = this;
         this.mainGroup = mainGroup;
-        tabTable = new Table();
+        initPlayerAvatar();
+        initTabTable();
+        initTabs();
+        setSelectedTab(ItemType.BACK);
+    }
+    private void initPlayerAvatar() {
         playerAvatar = new PlayerAvatar();
         mainGroup.addActor(playerAvatar.getRoot());
+    }
+    private void initTabTable() {
+        tabTable = new Table();
         tabTable.top();
         tabTable.setSize(GameConfig.SCREEN_WIDTH, 120);
         tabTable.setPosition(0, GameConfig.SCREEN_HEIGHT/2-tabTable.getHeight());
         SpriteDrawable backgroundTabTable = new SpriteDrawable(new Sprite(ResourcesManager.getOnePixelTexture()));
         tabTable.setBackground(backgroundTabTable);
         mainGroup.addActor(tabTable);
-        TextureRegion backgroundItemTextureRegion = new TextureRegion(ResourcesManager.getTexture(FilePaths.BACKGROUND_ITEM));
+    }
+    private void initTabs() {
         tabs = new ArrayList<>();
+        TextureRegion backgroundItemTextureRegion = new TextureRegion(ResourcesManager.getTexture(FilePaths.BACKGROUND_ITEM));
         for (ItemType type : ItemType.values()) {
             ArrayList<String> files = FilePaths.getItemsFilePath(type);
             if(type == ItemType.BODY || type == ItemType.HEAD) {
@@ -63,7 +73,6 @@ public class Inventory implements Disposable {
             InventoryItem item = items.get(rand);
             setSelectedItem(item);
         }
-        setSelectedTab(ItemType.BACK);
     }
     private Tab findTab(ItemType type) {
         for (Tab tab : tabs) {

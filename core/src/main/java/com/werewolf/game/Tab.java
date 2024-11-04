@@ -22,10 +22,10 @@ import java.util.ArrayList;
 public class Tab {
     private final ItemType type;
     private ArrayList<InventoryItem> items;
-    private final Image icon;
+    private Image icon;
     private InventoryItem selectedItem;
-    private final Table itemTable;
-    private final ScrollPane scrollPane;
+    private Table itemTable;
+    private ScrollPane scrollPane;
     private static final Color selected;
     private static final Color unSelected;
     static {
@@ -36,7 +36,11 @@ public class Tab {
     }
     public Tab(ItemType type,ArrayList<InventoryItem> items, Image icon) {
         this.type = type;
-        this.items = items;
+        initIcon(icon);
+        initItemTable();
+        setItems(items);
+    }
+    private void initIcon(Image icon) {
         this.icon = icon;
         icon.setScaling(Scaling.fit);
         icon.setOrigin(Align.center);
@@ -50,6 +54,8 @@ public class Tab {
             }
         });
         Inventory.getInstance().getTabTable().add(icon).width(36).height(36).pad(9);
+    }
+    private void initItemTable() {
         itemTable = new Table();
         itemTable.top();
         SpriteDrawable backgroundTable = new SpriteDrawable(new Sprite(ResourcesManager.getOnePixelTexture()));
@@ -57,7 +63,6 @@ public class Tab {
         scrollPane = new ScrollPane(itemTable);
         scrollPane.setScrollingDisabled(false, false);
         scrollPane.setSize(GameConfig.SCREEN_WIDTH, GameConfig.SCREEN_HEIGHT/2-60);
-        setItems(items);
     }
     private void setItems(ArrayList<InventoryItem> items) {
         this.items = items;
@@ -87,7 +92,6 @@ public class Tab {
     public ItemType getType() {
         return type;
     }
-
     public void setSelectedItem(InventoryItem selectedItem) {
         if(this.selectedItem != selectedItem) {
             Inventory.getInstance().getPlayerAvatar().setItem(selectedItem.getItemAvatar());

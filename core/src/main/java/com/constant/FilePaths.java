@@ -14,7 +14,9 @@ public class FilePaths {
     public static final String BACKGROUND_INTRO = "wolvesville_large.png";
     public static final String BACKGROUND_INFO_SCREEN = "wolvesville_large_night.png";
     public static final String BACKGROUND_ITEM = "Item/item_background.png";
-
+    public static final String TEXT_BUTTON_SKIN = "Skin/button/button-field.json";
+    public static final String TEXT_BUTTON_ROLE_SKIN = "Skin/button/button_role.json";
+    public static final String TEXT_FIELD_NAME = "Skin/button/text-field-name.json";
     public static String getItemDirectory(ItemType itemType) {
         StringBuilder name = new StringBuilder(itemType.name().toLowerCase());
         name.setCharAt(0, Character.toUpperCase(name.charAt(0)));

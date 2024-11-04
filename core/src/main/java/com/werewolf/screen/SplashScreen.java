@@ -3,6 +3,9 @@ package com.werewolf.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Align;
@@ -16,25 +19,30 @@ import com.werewolf.MainGame;
 
 public class SplashScreen implements Screen {
     private Stage stage;
-    private Texture2D background;
+    private Texture2D backgroundTexture;
+    private Image background;
     @Override
     public void show() {
-        // Create stage
+        initStage();
+        initBackground();
+        fadeBackground();
+    }
+    private void initStage() {
         stage = new Stage();
-        // Load background texture
-        background = ResourcesManager.getTexture(FilePaths.BACKGROUND_INTRO);
-        // Create background image
-        Image backgroundImage = new Image(background);
-        backgroundImage.setOrigin(Align.center);
-        backgroundImage.setScale(1.31f);
-        backgroundImage.setPosition(GameConfig.SCREEN_WIDTH/2, GameConfig.SCREEN_HEIGHT / 2,Align.center);
-        // Add background to stage
-        stage.addActor(backgroundImage);
-        // Fade alpha background image 0 -> 1
-        Tween fadeIn = new FadeTween(backgroundImage, 0, 1, 1.5f);
+    }
+    private void initBackground() {
+        backgroundTexture = ResourcesManager.getTexture(FilePaths.BACKGROUND_INTRO);
+        background = new Image(backgroundTexture);
+        background.setOrigin(Align.center);
+        background.setScale(1.31f);
+        background.setPosition(GameConfig.SCREEN_WIDTH/2, GameConfig.SCREEN_HEIGHT / 2,Align.center);
+        stage.addActor(background);
+    }
+    private void fadeBackground() {
+        Tween fadeIn = new FadeTween(background, 0, 1, 1.5f);
         fadeIn.onComplete(() -> {
             Tween delayTween = new DelayTween(1,() -> {
-                Tween fadeOut = new FadeTween(backgroundImage, 1, 0, 1f);
+                Tween fadeOut = new FadeTween(background, 1, 0, 0.3f);
                 fadeOut.onComplete(() -> {
                     MainGame.getInstance().setScreen(new InfoUserScreen());
                 });
@@ -46,7 +54,7 @@ public class SplashScreen implements Screen {
     }
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(Color.DARK_GRAY);
+        ScreenUtils.clear(Color.WHITE);
         stage.act(delta);
         stage.draw();
     }
@@ -71,6 +79,6 @@ public class SplashScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
-        background.dispose();
+        backgroundTexture.dispose();
     }
 }

@@ -2,9 +2,11 @@ package com.werewolf.lwjgl3;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
+import com.badlogic.gdx.graphics.Color;
 import com.config.GameConfig;
 import com.constant.FilePaths;
 import com.werewolf.MainGame;
+
 
 /** Launches the desktop (LWJGL3) application. */
 public class Lwjgl3Launcher {
@@ -31,6 +33,7 @@ public class Lwjgl3Launcher {
         //// You may also need to configure GPU drivers to fully disable Vsync; this can cause screen tearing.
         configuration.setWindowedMode(GameConfig.SCREEN_WIDTH, GameConfig.SCREEN_HEIGHT);
         configuration.setResizable(false);
+        configuration.setInitialBackgroundColor(new Color(1, 1, 1, 0.5f));
         //// You can change these files; they are in lwjgl3/src/main/resources/ .
         configuration.setWindowIcon(FilePaths.ICON_LAUNCHER);
         return configuration;
