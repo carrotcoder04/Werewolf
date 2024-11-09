@@ -27,7 +27,7 @@ public class ResourcesManager {
         onePixelTexture = new Texture(onePixelPixmap);
     }
     public static Texture2D getTexture(String path) {
-        if (!textures.containsKey(path)) {
+        if (!textures.containsKey(path) || !textures.get(path).isManaged()) {
             Texture2D texture = new Texture2D(Gdx.files.internal(path));
             texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
             textures.put(path, texture);

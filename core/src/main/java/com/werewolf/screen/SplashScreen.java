@@ -1,11 +1,7 @@
 package com.werewolf.screen;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.GL30;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Align;
@@ -44,7 +40,7 @@ public class SplashScreen implements Screen {
             Tween delayTween = new DelayTween(1,() -> {
                 Tween fadeOut = new FadeTween(background, 1, 0, 0.3f);
                 fadeOut.onComplete(() -> {
-                    MainGame.getInstance().setScreen(new InfoUserScreen());
+                    MainGame.getInstance().setScreen(new ClientInfoScreen());
                 });
                 fadeOut.start();
             });

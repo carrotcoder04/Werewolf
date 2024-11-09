@@ -10,7 +10,6 @@ public class Texture2D extends Texture {
         super(internalPath);
         this.path = internalPath;
     }
-
     public Texture2D(FileHandle file) {
         super(file);
         this.path = file.path();
