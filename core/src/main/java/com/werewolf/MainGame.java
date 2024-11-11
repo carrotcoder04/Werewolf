@@ -6,7 +6,6 @@ import com.badlogic.gdx.files.FileHandle;
 import com.network.Client;
 import com.resources.ResourcesManager;
 import com.tween.TweenController;
-import com.werewolf.screen.ClientInfoScreen;
 import com.werewolf.screen.SplashScreen;
 
 

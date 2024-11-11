@@ -7,9 +7,7 @@ import com.network.clientstate.state.ClientState;
 import com.network.clientstate.handler.ClientMessageHandler;
 import com.serialization.Serializable;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.util.Arrays;
 import java.util.concurrent.CompletableFuture;
@@ -17,8 +15,8 @@ import java.util.concurrent.CompletableFuture;
 
 public class Client {
     private Socket socket;
-    private InputStream in;
-    private OutputStream out;
+    private DataInputStream in;
+    private DataOutputStream out;
     private ClientMessageHandler stateHandler;
     private ClientState clientState;
     private static Client instance;
@@ -28,8 +26,8 @@ public class Client {
     public void connect() {
         try {
             socket = new Socket(NetworkConfig.IP_SERVER,NetworkConfig.PORT );
-            in = socket.getInputStream();
-            out = socket.getOutputStream();
+            in = new DataInputStream(socket.getInputStream());
+            out = new DataOutputStream(socket.getOutputStream());
             CompletableFuture.runAsync(this::readLoop);
             setClientState(ClientState.CLIENT_INFO_HANDLER);
         }
@@ -39,12 +37,21 @@ public class Client {
         }
     }
     private void readLoop() {
-        byte[] buffer = new byte[1024];
         while (true) {
             try {
-                int len = in.read(buffer);
-                System.out.println("len: " + len);
-                byte[] data = Arrays.copyOfRange(buffer, 0, len);
+                int size = in.readShort();
+                byte[] data = new byte[size];
+                int len = 0;
+                int byteRead = 0;
+                while (byteRead < size) {
+                    len = in.read(data, byteRead, size - byteRead);
+                    if (len > 0) {
+                        byteRead += len;
+                    }
+                    else {
+                        throw new IOException();
+                    }
+                }
                 receiveMessage(data);
             }
             catch (IOException e) {
@@ -87,8 +94,8 @@ public class Client {
 
     private void send(byte[] data) {
         try {
+            out.writeShort(data.length);
             out.write(data);
-            out.flush();
         }
         catch (IOException e) {
             e.printStackTrace();
