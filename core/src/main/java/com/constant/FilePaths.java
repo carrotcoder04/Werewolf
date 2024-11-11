@@ -26,6 +26,12 @@ public class FilePaths {
         String text = assets.readString();
         ASSETS_PATHS = text.split("\n");
     }
+    public static int getIndexOfAsset(String path) {
+        return Arrays.binarySearch(ASSETS_PATHS,1,ASSETS_PATHS.length, path);
+    }
+    public static String getAssetPath(int index) {
+        return ASSETS_PATHS[index];
+    }
     public static String getItemDirectory(ItemType itemType) {
         StringBuilder name = new StringBuilder(itemType.name().toLowerCase());
         name.setCharAt(0, Character.toUpperCase(name.charAt(0)));

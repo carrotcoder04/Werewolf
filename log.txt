@@ -9,3 +9,11 @@ MASK : 183
 GLASSES : 172
 HAT : 357
 Front : 178
+java.lang.ArrayIndexOutOfBoundsException: Index -2029 out of bounds for length 2131
+java.lang.ArrayIndexOutOfBoundsException: Index -2029 out of bounds for length 2131
+java.lang.ArrayIndexOutOfBoundsException: Index -2029 out of bounds for length 2131
+java.lang.ArrayIndexOutOfBoundsException: Index -2029 out of bounds for length 2131
+java.lang.ArrayIndexOutOfBoundsException: Index -2029 out of bounds for length 2131
+java.lang.ArrayIndexOutOfBoundsException: Index -2029 out of bounds for length 2131
+java.lang.ArrayIndexOutOfBoundsException: Index -2029 out of bounds for length 2131
+java.lang.ArrayIndexOutOfBoundsException: Index -2029 out of bounds for length 2131

@@ -14,14 +14,18 @@ public class RoomHandler extends ClientMessageHandler {
     }
     @Override
     public void onMessage(Client client, byte tag, Reader reader) {
-        System.out.println("tag: " + tag + " reader: " + reader.getBuffer().length);
         switch (tag) {
-            case MessageTag.UPDATE_PLAYER:
+            case MessageTag.UPDATE_ROOM:
                 InvokeOnMainThread.invoke(() -> {
                     PlayerInfo playerInfo = new PlayerInfo(reader);
-                    PlayerBoard.getInstance().updatePlayer(playerInfo);
+                    PlayerBoard.getInstance().updateRoom(playerInfo);
                 });
                 break;
+            case MessageTag.UPDATE_SLOT_EMPTY:
+                int slotId = reader.nextInt();
+                InvokeOnMainThread.invoke(() -> {
+                    PlayerBoard.getInstance().updateSlotEmpty(slotId);
+                });
         }
     }
     @Override

@@ -85,13 +85,15 @@ public class ClientInfoScreen implements Screen {
         Skin skin = ResourcesManager.getSkin(FilePaths.BUTTON_PLAY);
         playButton = new TextButton("Play",skin);
         playButton.setPosition(GameConfig.SCREEN_WIDTH/2+110, GameConfig.SCREEN_HEIGHT-100,Align.center);
+        playButton.setDisabled(true);
         playButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                requestPlay();
+                if(!playButton.isDisabled()) {
+                    requestPlay();
+                }
             }
         });
-        playButton.setDisabled(true);
         stage.addActor(playButton);
     }
     private void initRoleButton() {

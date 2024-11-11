@@ -3,6 +3,7 @@ package com.werewolf.game.inventory;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.constant.FilePaths;
 import com.io.Reader;
 import com.io.Writer;
 import com.resources.ResourcesManager;
@@ -39,15 +40,15 @@ public class Item implements Serializable {
     @Override
     public void deserialize(Reader reader) {
         this.type = ItemType.values()[reader.nextByte()];
-        this.imagePath = reader.nextString();
+        this.imagePath = FilePaths.getAssetPath(reader.nextInt());
         this.image = new Image(ResourcesManager.getTexture(imagePath));
     }
     @Override
     public Writer serialize() {
-        Writer writer = new Writer(100);
+        Writer writer = new Writer(6);
         byte type = (byte) this.type.ordinal();
         writer.writeByte(type);
-        writer.writeString(imagePath);
+        writer.writeInt(FilePaths.getIndexOfAsset(imagePath));
         return writer;
     }
     public Item clone() {

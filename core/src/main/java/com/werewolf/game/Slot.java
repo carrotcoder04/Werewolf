@@ -26,12 +26,6 @@ public class Slot {
         this.background.setScaling(Scaling.fit);
         this.background.setSize(WIDTH,HEIGHT);
         this.root.addActor(background);
-        this.root.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                Player.getMainPlayer().setSlot(id);
-            }
-        });
     }
     public void setPlayer(Player player) {
         this.player = player;
@@ -46,6 +40,7 @@ public class Slot {
     public void removePlayer() {
         if(player != null) {
             root.removeActor(player.getRoot());
+            player = null;
         }
     }
     public boolean isEmpty() {

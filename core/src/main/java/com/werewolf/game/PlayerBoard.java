@@ -1,8 +1,4 @@
 package com.werewolf.game;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.config.GameConfig;
 
@@ -21,10 +17,7 @@ public class PlayerBoard extends Table  {
         for(int i = 0; i < 12;i++) {
             addSlot(new Slot(i));
         }
-        Player mainPlayer = Player.getMainPlayer();
-        getSlot(mainPlayer.getId()).setPlayer(mainPlayer);
     }
-
     @Override
     public void act(float delta) {
         super.act(delta);
@@ -39,7 +32,10 @@ public class PlayerBoard extends Table  {
     public static PlayerBoard getInstance() {
         return instance;
     }
-    public void updatePlayer(PlayerInfo playerInfo) {
+    public void updateSlotEmpty(int index) {
+        getSlot(index).removePlayer();
+    }
+    public void updateRoom(PlayerInfo playerInfo) {
         int id = playerInfo.getId();
         if(!getSlot(id).isEmpty()) {
             return;

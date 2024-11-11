@@ -49,7 +49,7 @@ public class Avatar implements Serializable {
 
     @Override
     public Writer serialize() {
-        Writer writer = new Writer();
+        Writer writer = new Writer(66);
         for(Item item : items.values()) {
             writer.write(item);
         }
