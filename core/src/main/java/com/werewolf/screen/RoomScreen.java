@@ -12,7 +12,7 @@ import com.werewolf.game.Player;
 import com.werewolf.game.PlayerBoard;
 
 public class RoomScreen implements Screen , Disposable {
-    private Stage stage;
+    public static Stage stage;
     private PlayerBoard playerBoard;
     private BoxChat boxChat;
     public RoomScreen(PlayerInfo mainPlayerInfo) {

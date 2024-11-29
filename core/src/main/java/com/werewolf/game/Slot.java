@@ -1,9 +1,10 @@
 package com.werewolf.game;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
 import com.constant.FilePaths;
@@ -17,6 +18,8 @@ public class Slot {
     public static final int HEIGHT = 172;
     private int id;
     private Image background;
+    private Image icon;
+    private Label labelName;
     private Player player;
     private Group root;
     public Slot(int id) {
@@ -30,6 +33,7 @@ public class Slot {
     public void setPlayer(Player player) {
         this.player = player;
         player.setSlot(id);
+        setLabelName(player.getName());
         this.root.addActor(player.getRoot());
         player.getRoot().setX(WIDTH / 2);
         Tween fadeTween = new FadeTween(player.getRoot(), 0, 1, 0.3f);
@@ -41,7 +45,33 @@ public class Slot {
         if(player != null) {
             root.removeActor(player.getRoot());
             player = null;
+            if(labelName != null) {
+                root.removeActor(labelName);
+            }
         }
+    }
+    public void setIcon(Image icon) {
+        if(this.icon != null) {
+            root.removeActor(this.icon);
+        }
+        this.icon = icon;
+        root.addActor(icon);
+    }
+    private void setLabelName(String name) {
+        BitmapFont font = ResourcesManager.getFont(FilePaths.ROBOTO_BOLD);
+        Color fontColor = Color.WHITE.cpy();
+        if(player == Player.getMainPlayer()) {
+            fontColor = Color.RED.cpy();
+        }
+        Label.LabelStyle labelStyle = new Label.LabelStyle(font,fontColor);
+        Label label = new Label(id + " " + name,labelStyle);
+        label.setAlignment(Align.center);
+        label.setPosition(WIDTH / 2 - (name.length()+2) * 3.5f, HEIGHT - 20);
+        if(this.labelName != null) {
+            root.removeActor(this.labelName);
+        }
+        this.labelName = label;
+        root.addActor(label);
     }
     public boolean isEmpty() {
         return player == null;

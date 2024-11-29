@@ -38,6 +38,7 @@ public class RoomMessageHandler extends ClientMessageHandler {
                 try {
                     while (true) {
                         RoleInfo roleInfo = roleInfoArr[reader.nextByte()];
+                        System.out.println(roleInfo);
                         roleInfos.add(roleInfo);
                     }
                 }
@@ -49,8 +50,8 @@ public class RoomMessageHandler extends ClientMessageHandler {
                 break;
             case MessageTag.MY_ROLES:
                 RoleInfo roleInfo = RoleInfo.values()[reader.nextByte()];
-                Role role = Role.createRole(roleInfo);
                 InvokeOnMainThread.invoke(() -> {
+                    Role role = Role.createRole(roleInfo);
                     Player.getMainPlayer().setRole(role);
                 });
         }

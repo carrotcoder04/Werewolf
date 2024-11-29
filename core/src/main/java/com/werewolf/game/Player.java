@@ -1,6 +1,14 @@
 package com.werewolf.game;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.resources.ResourcesManager;
+import com.resources.Texture2D;
 import com.werewolf.game.role.Role;
+
 
 public class Player {
     private int id;
@@ -29,7 +37,7 @@ public class Player {
     }
     public void setSlot(int id) {
         try {
-            Slot oldSlot = PlayerBoard.getInstance().getSlot(this.id);
+            Slot oldSlot = getMySlot();
             Slot newSlot = PlayerBoard.getInstance().getSlot(id);
             if(!newSlot.isEmpty() || oldSlot == newSlot) {
                 return;
@@ -39,13 +47,14 @@ public class Player {
             newSlot.setPlayer(this);
         }
         catch (IndexOutOfBoundsException ignore) {
-
         }
-
     }
     public void setRole(Role role) {
         this.role = role;
-        root.addActor(role.getIcon());
+        getMySlot().setIcon(role.getIcon());
+    }
+    public Slot getMySlot() {
+        return PlayerBoard.getInstance().getSlot(this.id);
     }
     public Role getRole() {
         return role;

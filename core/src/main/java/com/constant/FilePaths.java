@@ -20,6 +20,8 @@ public class FilePaths {
     public static final String TEXT_FIELD_NAME = "Skin/TextField/text_field_name.json";
     public static final String BOX_CHAT = "Skin/ScrollPane/box_chat.json";
     public static final String CHAT_TEXT_FIELD = "Skin/TextField/chat_text_field.json";
+
+    public static final String ROBOTO_BOLD = "Font/Roboto-Bold.ttf";
     public static final String CHAT_LABEL = "Skin/TextField/chat_label.json";
     private static final String[] ASSETS_PATHS;
     static {

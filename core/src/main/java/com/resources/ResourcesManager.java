@@ -48,6 +48,7 @@ public class ResourcesManager {
         if (!fonts.containsKey(path)) {
             FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(path));
             FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+            parameter.size = 12;
             parameter.characters = Constants.FONT_CHARACTERS;
             BitmapFont font = generator.generateFont(parameter);
             generator.dispose();

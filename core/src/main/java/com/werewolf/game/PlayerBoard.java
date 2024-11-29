@@ -45,7 +45,12 @@ public class PlayerBoard extends Table  {
         if(!getSlot(id).isEmpty()) {
             return;
         }
-        getSlot(id).setPlayer(new Player(playerInfo));
+        if(playerInfo.getId() == Player.getMainPlayer().getId()) {
+            getSlot(id).setPlayer(Player.getMainPlayer());
+        }
+        else {
+            getSlot(id).setPlayer(new Player(playerInfo));
+        }
     }
     public Slot getSlot(int index) {
         return slots.get(index);
