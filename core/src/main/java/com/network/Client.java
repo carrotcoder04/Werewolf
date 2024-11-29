@@ -106,7 +106,7 @@ public class Client {
         send(buffer);
     }
 
-    private void send(byte tag,Writer message) {
+    public void send(byte tag,Writer message) {
         message.writeTag(tag);
         send(message.getBuffer());
     }

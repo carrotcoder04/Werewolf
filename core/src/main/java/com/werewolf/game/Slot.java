@@ -60,8 +60,8 @@ public class Slot {
     private void setLabelName(String name) {
         BitmapFont font = ResourcesManager.getFont(FilePaths.ROBOTO_BOLD);
         Color fontColor = Color.WHITE.cpy();
-        if(player == Player.getMainPlayer()) {
-            fontColor = Color.RED.cpy();
+        if(player.isMainPlayer()) {
+            fontColor = new Color(234/255f,96/255f,96/255f,1);
         }
         Label.LabelStyle labelStyle = new Label.LabelStyle(font,fontColor);
         Label label = new Label(id + " " + name,labelStyle);

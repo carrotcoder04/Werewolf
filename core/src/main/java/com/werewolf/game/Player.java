@@ -97,4 +97,7 @@ public class Player {
     public static void setMainPlayer(Player player) {
         mainPlayer = player;
     }
+    public boolean isMainPlayer() {
+        return mainPlayer == this;
+    }
 }

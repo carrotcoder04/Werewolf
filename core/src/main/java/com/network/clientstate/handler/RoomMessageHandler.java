@@ -3,6 +3,7 @@ package com.network.clientstate.handler;
 import com.io.Reader;
 import com.message.tag.MessageTag;
 import com.network.Client;
+import com.werewolf.BoxChat;
 import com.werewolf.InvokeOnMainThread;
 import com.werewolf.game.Player;
 import com.werewolf.game.PlayerBoard;
@@ -45,7 +46,7 @@ public class RoomMessageHandler extends ClientMessageHandler {
                 catch (IndexOutOfBoundsException e) {
                 }
                 InvokeOnMainThread.invoke(() -> {
-                   PlayerBoard.getInstance().setAllRoleInfos(roleInfos);
+                    PlayerBoard.getInstance().setAllRoleInfos(roleInfos);
                 });
                 break;
             case MessageTag.MY_ROLES:
@@ -53,6 +54,17 @@ public class RoomMessageHandler extends ClientMessageHandler {
                 InvokeOnMainThread.invoke(() -> {
                     Role role = Role.createRole(roleInfo);
                     Player.getMainPlayer().setRole(role);
+                });
+                break;
+            case MessageTag.CHAT:
+                InvokeOnMainThread.invoke(() -> {
+                    Player player = PlayerBoard.getInstance().getSlot(reader.nextByte()).getPlayer();
+                    BoxChat.getInstance().addText(player, reader.nextString());
+                });
+                break;
+            case MessageTag.NOTIFICATION:
+                InvokeOnMainThread.invoke(() -> {
+                    BoxChat.getInstance().addNotification(reader.nextString());
                 });
         }
     }
