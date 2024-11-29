@@ -28,7 +28,7 @@ public class Client {
             in = new DataInputStream(socket.getInputStream());
             out = new DataOutputStream(socket.getOutputStream());
             CompletableFuture.runAsync(this::readLoop);
-            setClientState(ClientState.CLIENT_INFO_HANDLER);
+            setClientState(ClientState.CLIENT_INFO_MESSAGE_HANDLER);
         }
         catch (IOException e) {
             e.printStackTrace();

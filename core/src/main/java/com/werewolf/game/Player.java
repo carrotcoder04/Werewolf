@@ -66,6 +66,11 @@ public class Player {
     public void setAlive(boolean alive) {
         isAlive = alive;
     }
+
+    public String getName() {
+        return name;
+    }
+
     public static Player getMainPlayer() {
         return mainPlayer;
     }

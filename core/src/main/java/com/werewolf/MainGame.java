@@ -35,6 +35,7 @@ public class MainGame extends Game {
             super.render();
         }
         catch (Exception e) {
+            e.printStackTrace();
             logFile.writeString(e + "\n", true);
         }
     }

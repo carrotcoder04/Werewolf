@@ -1,5 +1,6 @@
 package com.werewolf.game.role;
 
+
 public enum RoleInfo {
     SEER("Tiên Tri",Team.VILLAGER,Aura.GOOD,Description.SEER),
     MAYOR("Thị Trưởng",Team.VILLAGER,Aura.GOOD,Description.MAYOR),

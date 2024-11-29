@@ -1,0 +1,60 @@
+{
+com.badlogic.gdx.graphics.g2d.BitmapFont: {
+	Roboto-Thin: {
+		file: Roboto-Thin.fnt
+		scaledSize: -1
+		markupEnabled: false
+		flip: false
+	}
+	Roboto-ThinItalicttf: {
+		file: Roboto-ThinItalic.ttf.fnt
+		scaledSize: -1
+		markupEnabled: false
+		flip: false
+	}
+}
+com.badlogic.gdx.graphics.Color: {
+	RGBA_0_0_0_255: {
+		r: 0
+		g: 0
+		b: 0
+		a: 1
+	}
+	RGBA_176_255_213_255: {
+		r: 0.6901961
+		g: 1
+		b: 0.8352941
+		a: 1
+	}
+	RGBA_194_191_191_194: {
+		r: 0.7607843
+		g: 0.7490196
+		b: 0.7490196
+		a: 0.76404494
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
+	cursor: {
+		name: white-pixel
+		color: RGBA_0_0_0_255
+		minWidth: 1
+		minHeight: 1
+	}
+	selection: {
+		name: white-pixel
+		color: RGBA_176_255_213_255
+		minWidth: 1
+		minHeight: 1
+	}
+}
+com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
+	default: {
+		font: Roboto-Thin
+		fontColor: RGBA_0_0_0_255
+		background: chat_text_field
+		cursor: cursor
+		selection: selection
+		messageFont: Roboto-ThinItalicttf
+	}
+}
+}

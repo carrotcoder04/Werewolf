@@ -15,7 +15,6 @@ import com.constant.FilePaths;
 import com.resources.ResourcesManager;
 import com.tween.MoveYTween;
 import com.tween.Tween;
-import com.werewolf.MainGame;
 import com.werewolf.game.Avatar;
 
 import java.util.ArrayList;

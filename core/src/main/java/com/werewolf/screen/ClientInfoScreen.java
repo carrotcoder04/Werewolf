@@ -14,7 +14,6 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.config.GameConfig;
 import com.constant.FilePaths;
-import com.io.Writer;
 import com.message.tag.MessageTag;
 import com.network.Client;
 import com.werewolf.MainGame;
@@ -63,7 +62,7 @@ public class ClientInfoScreen implements Screen {
         nameField.setMessageText("Nhập tên của bạn...");
         nameField.setAlignment(Align.center);
         nameField.setSize(360, 62);
-        nameField.setMaxLength(10);
+        nameField.setMaxLength(12);
         nameField.getStyle().background.setLeftWidth(-135);
         nameField.setPosition(GameConfig.SCREEN_WIDTH / 2, GameConfig.SCREEN_HEIGHT - 100, Align.center);
         nameField.setTextFieldListener((textField, c) -> {

@@ -9,7 +9,7 @@ import com.werewolf.game.PlayerInfo;
 import com.werewolf.screen.ClientInfoScreen;
 
 
-public class ClientInfoHandler extends ClientMessageHandler {
+public class ClientInfoMessageHandler extends ClientMessageHandler {
     @Override
     public void onEnter(Client client) {
     }
@@ -23,7 +23,7 @@ public class ClientInfoHandler extends ClientMessageHandler {
             case MessageTag.YOUR_INFO:
                 InvokeOnMainThread.invoke(() -> {
                     ClientInfoScreen.getInstance().play(new PlayerInfo(reader));
-                    client.setClientState(ClientState.ROOM_HANDLER);
+                    client.setClientState(ClientState.ROOM_MESSAGE_HANDLER);
                 });
                 break;
         }

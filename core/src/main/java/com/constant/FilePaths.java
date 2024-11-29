@@ -2,11 +2,11 @@ package com.constant;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.werewolf.MainGame;
 import com.werewolf.game.inventory.ItemType;
+import com.werewolf.game.role.RoleInfo;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 
 public class FilePaths {
     public static final String FONT = "SJ  CCRichardStarkings.ttf";
@@ -18,16 +18,19 @@ public class FilePaths {
     public static final String BUTTON_ROLE = "Skin/Button/button_role.json";
     public static final String BACKGROUND_AVATAR = "background_avatar.png";
     public static final String TEXT_FIELD_NAME = "Skin/TextField/text_field_name.json";
-
-
+    public static final String BOX_CHAT = "Skin/ScrollPane/box_chat.json";
+    public static final String CHAT_TEXT_FIELD = "Skin/TextField/chat_text_field.json";
+    public static final String CHAT_LABEL = "Skin/TextField/chat_label.json";
     private static final String[] ASSETS_PATHS;
     static {
         FileHandle assets = Gdx.files.internal("assets.txt");
         String text = assets.readString();
         ASSETS_PATHS = text.split("\n");
     }
-    public static int getIndexOfAsset(String path) {
-        return Arrays.binarySearch(ASSETS_PATHS,1,ASSETS_PATHS.length, path);
+
+
+    public static String getRolePath(RoleInfo role) {
+        return "Role/icon_" + role.name().toLowerCase() + "_filled_small.png";
     }
     public static String getAssetPath(int index) {
         return ASSETS_PATHS[index];

@@ -40,7 +40,7 @@ public class PlayerInfo implements Serializable {
 
     @Override
     public Writer serialize() {
-        Writer writer = new Writer();
+        Writer writer = new Writer(1024);
         writer.writeInt(id);
         writer.writeString(name);
         writer.write(avatar);

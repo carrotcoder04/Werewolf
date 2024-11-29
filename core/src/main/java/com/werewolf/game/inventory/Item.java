@@ -40,18 +40,19 @@ public class Item implements Serializable {
     @Override
     public void deserialize(Reader reader) {
         this.type = ItemType.values()[reader.nextByte()];
-        this.imagePath = FilePaths.getAssetPath(reader.nextInt());
+        this.imagePath = reader.nextString();
         this.image = new Image(ResourcesManager.getTexture(imagePath));
     }
     @Override
     public Writer serialize() {
-        Writer writer = new Writer(6);
+        Writer writer = new Writer(100);
         byte type = (byte) this.type.ordinal();
         writer.writeByte(type);
-        writer.writeInt(FilePaths.getIndexOfAsset(imagePath));
+        writer.writeString(this.imagePath);
         return writer;
     }
     public Item clone() {
         return new Item(new Image(ResourcesManager.getTexture(imagePath)), type);
     }
+
 }

@@ -1,19 +1,15 @@
-BACK : 162
-BODY : 9
-CLOTHES : 447
-HEAD : 24
-MOUTH : 126
-HAIR : 223
-EYE : 170
-MASK : 183
-GLASSES : 172
-HAT : 357
-Front : 178
-java.lang.ArrayIndexOutOfBoundsException: Index -2029 out of bounds for length 2131
-java.lang.ArrayIndexOutOfBoundsException: Index -2029 out of bounds for length 2131
-java.lang.ArrayIndexOutOfBoundsException: Index -2029 out of bounds for length 2131
-java.lang.ArrayIndexOutOfBoundsException: Index -2029 out of bounds for length 2131
-java.lang.ArrayIndexOutOfBoundsException: Index -2029 out of bounds for length 2131
-java.lang.ArrayIndexOutOfBoundsException: Index -2029 out of bounds for length 2131
-java.lang.ArrayIndexOutOfBoundsException: Index -2029 out of bounds for length 2131
-java.lang.ArrayIndexOutOfBoundsException: Index -2029 out of bounds for length 2131
+java.lang.ArrayIndexOutOfBoundsException: Index -2 out of bounds for length 2145
+java.lang.ArrayIndexOutOfBoundsException: Index -2 out of bounds for length 2145
+java.lang.ArrayIndexOutOfBoundsException: Index -2 out of bounds for length 2145
+java.lang.ArrayIndexOutOfBoundsException: Index -88 out of bounds for length 2145
+java.lang.ArrayIndexOutOfBoundsException: Index -88 out of bounds for length 2145
+java.lang.ArrayIndexOutOfBoundsException: Index -165 out of bounds for length 2145
+java.lang.ArrayIndexOutOfBoundsException: Index -165 out of bounds for length 2145
+java.lang.ArrayIndexOutOfBoundsException: Index -165 out of bounds for length 2145
+java.lang.ArrayIndexOutOfBoundsException: Index -165 out of bounds for length 2145
+java.lang.ArrayIndexOutOfBoundsException: Index -165 out of bounds for length 2145
+java.lang.ArrayIndexOutOfBoundsException: Index -1929 out of bounds for length 2145
+java.lang.ArrayIndexOutOfBoundsException: Index -165 out of bounds for length 2145
+java.lang.ArrayIndexOutOfBoundsException: Index -165 out of bounds for length 2145
+java.lang.ArrayIndexOutOfBoundsException: Index -165 out of bounds for length 2145
+java.lang.ArrayIndexOutOfBoundsException: Index -1 out of bounds for length 2145
