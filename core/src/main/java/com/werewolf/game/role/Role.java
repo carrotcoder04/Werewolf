@@ -3,6 +3,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.constant.FilePaths;
 import com.resources.ResourcesManager;
 import com.resources.Texture2D;
 
@@ -22,7 +23,7 @@ public class Role {
         return this.info;
     }
     public Image getIcon() {
-        Texture2D texture2D = ResourcesManager.getTexture("Role/icon_" + info.name().toLowerCase() + "_filled_small.png");
+        Texture2D texture2D = ResourcesManager.getTexture(FilePaths.getRolePath(info));
         Image icon = new Image(new TextureRegion(texture2D));
         icon.setScale(0.3f);
         icon.setPosition(80,3);

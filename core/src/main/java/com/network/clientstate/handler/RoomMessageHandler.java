@@ -3,13 +3,13 @@ package com.network.clientstate.handler;
 import com.io.Reader;
 import com.message.tag.MessageTag;
 import com.network.Client;
-import com.werewolf.BoxChat;
-import com.werewolf.InvokeOnMainThread;
+import com.werewolf.*;
 import com.werewolf.game.Player;
 import com.werewolf.game.PlayerBoard;
 import com.werewolf.game.PlayerInfo;
 import com.werewolf.game.role.Role;
 import com.werewolf.game.role.RoleInfo;
+import com.werewolf.screen.RoomScreen;
 
 import java.util.ArrayList;
 
@@ -39,21 +39,22 @@ public class RoomMessageHandler extends ClientMessageHandler {
                 try {
                     while (true) {
                         RoleInfo roleInfo = roleInfoArr[reader.nextByte()];
-                        System.out.println(roleInfo);
                         roleInfos.add(roleInfo);
                     }
                 }
                 catch (IndexOutOfBoundsException e) {
                 }
                 InvokeOnMainThread.invoke(() -> {
-                    PlayerBoard.getInstance().setAllRoleInfos(roleInfos);
+                    RolePanel.getInstance().setRoles(roleInfos);
                 });
                 break;
-            case MessageTag.MY_ROLES:
+            case MessageTag.MY_ROLE:
                 RoleInfo roleInfo = RoleInfo.values()[reader.nextByte()];
                 InvokeOnMainThread.invoke(() -> {
                     Role role = Role.createRole(roleInfo);
                     Player.getMainPlayer().setRole(role);
+                    BoxChat.getInstance().addNotification("Vai trò của bạn là: " + roleInfo.getName() + ".");
+                    RolePanel.getInstance().setMainRole(roleInfo);
                 });
                 break;
             case MessageTag.CHAT:
@@ -66,6 +67,32 @@ public class RoomMessageHandler extends ClientMessageHandler {
                 InvokeOnMainThread.invoke(() -> {
                     BoxChat.getInstance().addNotification(reader.nextString());
                 });
+                break;
+            case MessageTag.CHANGE_GAME_STATE:
+                GameState gameState = GameState.values()[reader.nextByte()];
+                InvokeOnMainThread.invoke(() -> {
+                    GameTime.getInstance().setState(gameState);
+                });
+                break;
+            case MessageTag.ROLE_DISCLOSURE: {
+                byte disclosureId = reader.nextByte();
+                if (disclosureId == Player.getMainPlayer().getId()) {
+                    return;
+                }
+                RoleInfo disclosureRoleInfo = RoleInfo.values()[reader.nextByte()];
+                InvokeOnMainThread.invoke(() -> {
+                    Role role = Role.createRole(disclosureRoleInfo);
+                    Player player = PlayerBoard.getInstance().getSlot(disclosureId).getPlayer();
+                    player.setRole(role);
+                });
+                break;
+            }
+            case MessageTag.COUNT_DOWN:
+                String message = reader.nextString();
+                InvokeOnMainThread.invoke(() -> {
+                    RoomScreen.getInstance().setInfoText(message);
+                });
+                break;
         }
     }
     @Override

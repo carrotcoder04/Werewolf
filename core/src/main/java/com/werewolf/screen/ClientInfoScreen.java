@@ -39,7 +39,6 @@ public class ClientInfoScreen implements Screen {
         initInventory();
         initNameTextField();
         initPlayButton();
-        initRoleButton();
     }
     private void initStage() {
         this.stage = new Stage();
@@ -95,18 +94,7 @@ public class ClientInfoScreen implements Screen {
         });
         stage.addActor(playButton);
     }
-    private void initRoleButton() {
-        Skin skin = ResourcesManager.getSkin(FilePaths.BUTTON_ROLE);
-        roleButton = new TextButton("Vai trò",skin);
-        roleButton.setPosition(80, GameConfig.SCREEN_HEIGHT-40,Align.center);
-        roleButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                showRolePanel();
-            }
-        });
-        stage.addActor(roleButton);
-    }
+
     private void requestPlay() {
         PlayerInfo playerInfo = new PlayerInfo(-1,nameField.getText(),inventory.getPlayerAvatar().clone());
         Client.getInstance().send(MessageTag.PLAY,playerInfo);
@@ -114,9 +102,7 @@ public class ClientInfoScreen implements Screen {
     public void play(PlayerInfo playerInfo) {
         MainGame.getInstance().setScreen(new RoomScreen(playerInfo));
     }
-    private void showRolePanel() {
 
-    }
     @Override
     public void render(float delta) {
         ScreenUtils.clear(clearColor);

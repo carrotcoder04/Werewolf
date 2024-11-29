@@ -3,18 +3,14 @@ package com.werewolf;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.*;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
+import com.config.GameConfig;
 import com.constant.FilePaths;
 import com.io.Writer;
 import com.message.tag.MessageTag;
@@ -24,20 +20,29 @@ import com.werewolf.game.Player;
 
 public class BoxChat {
     private Table table;
-    private ScrollPane scrollPane;
+    private ScrollPane chatFrame;
     private TextField chatText;
-    private Skin labelSkin;
     private Group root;
     private static BoxChat instance;
+    private TextButton roleButton;
     public BoxChat() {
         instance = this;
+        this.root = new Group();
+        initChatFrame();
+        initChatText();
+        initRoleButton();
+    }
+    private void initChatFrame() {
         table = new Table();
-        scrollPane = new ScrollPane(this.table, ResourcesManager.getSkin(FilePaths.BOX_CHAT));
+        chatFrame = new ScrollPane(this.table, ResourcesManager.getSkin(FilePaths.BOX_CHAT));
         table.top().left().padLeft(10).padTop(10).padRight(10).padBottom(10);
-        scrollPane.setY(60);
-        scrollPane.setScrollingDisabled(true, false);
-        scrollPane.setColor(new Color(0.85f, 0.85f, 0.85f, 0.8f));
-        scrollPane.setSize(550, 270);
+        chatFrame.setY(60);
+        chatFrame.setScrollingDisabled(true, false);
+        chatFrame.setColor(new Color(0.85f, 0.85f, 0.85f, 0.8f));
+        chatFrame.setSize(550, 270);
+        this.root.addActor(this.chatFrame);
+    }
+    private void initChatText() {
         chatText = new TextField("", ResourcesManager.getSkin(FilePaths.CHAT_TEXT_FIELD));
         chatText.setY(5);
         chatText.getStyle().background.setLeftWidth(10);
@@ -73,10 +78,35 @@ public class BoxChat {
                 return true;
             }
         });
-        labelSkin = ResourcesManager.getSkin(FilePaths.CHAT_LABEL);
-        this.root = new Group();
-        this.root.addActor(this.scrollPane);
         this.root.addActor(this.chatText);
+    }
+    private void initRoleButton() {
+        Skin skin = ResourcesManager.getSkin(FilePaths.BUTTON_ROLE);
+        roleButton = new TextButton("Vai trò",skin);
+        roleButton.setPosition(GameConfig.SCREEN_WIDTH-70, 308, Align.center);
+        roleButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if(RolePanel.getInstance().isTweening()) {
+                    return;
+                }
+                if(!RolePanel.getInstance().isVisible()) {
+                    showRolePanel();
+                }
+                else {
+                    hideRolePanel();
+                }
+            }
+        });
+        root.addActor(roleButton);
+    }
+    private void showRolePanel() {
+        roleButton.setText("Đóng");
+        RolePanel.getInstance().show();
+    }
+    private void hideRolePanel() {
+        roleButton.setText("Vai trò");
+        RolePanel.getInstance().hide();
     }
     public void addText(Player player,String text) {
         addText(player.getId() + " "  + player.getName(),text, !player.isAlive(), text.contains(String.valueOf(Player.getMainPlayer().getId())),false);

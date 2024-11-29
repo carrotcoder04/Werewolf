@@ -56,6 +56,8 @@ public class Slot {
         }
         this.icon = icon;
         root.addActor(icon);
+        Tween fadeTween = new FadeTween(icon ,0,1,0.5f);
+        fadeTween.start();
     }
     private void setLabelName(String name) {
         BitmapFont font = ResourcesManager.getFont(FilePaths.ROBOTO_BOLD);

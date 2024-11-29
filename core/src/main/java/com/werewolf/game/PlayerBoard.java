@@ -1,18 +1,17 @@
 package com.werewolf.game;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.config.GameConfig;
-import com.werewolf.game.role.RoleInfo;
 
 import java.util.ArrayList;
 
 public class PlayerBoard extends Table  {
     private final ArrayList<Slot> slots;
     private static PlayerBoard instance;
-    private ArrayList<RoleInfo> roleInfos;
     public PlayerBoard() {
         super();
         instance = this;
         top();
+        padTop(20);
         setSize(GameConfig.SCREEN_WIDTH, GameConfig.SCREEN_HEIGHT/2);
         setPosition(0, GameConfig.SCREEN_HEIGHT/2);
         slots = new ArrayList<>();
@@ -33,9 +32,6 @@ public class PlayerBoard extends Table  {
     }
     public static PlayerBoard getInstance() {
         return instance;
-    }
-    public void setAllRoleInfos(ArrayList<RoleInfo> roleInfos) {
-        this.roleInfos = roleInfos;
     }
     public void updateSlotEmpty(int index) {
         getSlot(index).removePlayer();

@@ -6,7 +6,6 @@ import com.werewolf.game.inventory.ItemType;
 import com.werewolf.game.role.RoleInfo;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class FilePaths {
     public static final String FONT = "SJ  CCRichardStarkings.ttf";
@@ -24,7 +23,7 @@ public class FilePaths {
     public static final String ROBOTO_BOLD = "Font/Roboto-Bold.ttf";
     public static final String ROBOTO_ITALIC = "Font/Roboto-Italic.ttf";
     public static final String ROBOTO_REGULAR = "Font/Roboto-Regular.ttf";
-    public static final String CHAT_LABEL = "Skin/TextField/chat_label.json";
+    public static final String ROLE_PANEL = "Skin/ScrollPane/role_panel.json";
     private static final String[] ASSETS_PATHS;
     static {
         FileHandle assets = Gdx.files.internal("assets.txt");

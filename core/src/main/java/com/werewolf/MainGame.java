@@ -12,21 +12,16 @@ import com.werewolf.screen.SplashScreen;
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class MainGame extends Game {
     private static MainGame instance;
-    private FileHandle logFile;
     public MainGame() {
         instance = this;
     }
     @Override
     public void create() {
-        logFile = Gdx.files.absolute("C:\\Users\\ASUS\\Desktop\\FolderManager\\JavaGame\\Werewolf\\log.txt");
         Client client = new Client();
         client.connect();
         setScreen(new SplashScreen());
     }
-    public void log(String str) {
-        logFile.writeString(str + "\n", true);
 
-    }
     @Override
     public void render() {
         try {
@@ -36,7 +31,6 @@ public class MainGame extends Game {
         }
         catch (Exception e) {
             e.printStackTrace();
-            logFile.writeString(e + "\n", true);
         }
     }
 
