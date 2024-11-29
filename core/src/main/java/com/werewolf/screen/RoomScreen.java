@@ -47,13 +47,13 @@ public class RoomScreen implements Screen , Disposable {
     public void setThemeColorByState(GameState state) {
         switch (state) {
             case NIGHT:
-                Tween lerpColorNgiht = new Tween(1.5f) {
+                Tween lerpColorNight = new Tween(1.5f) {
                     @Override
                     protected void onUpdate(float value) {
                         theme.lerp(Color.GRAY, value);
                     }
                 };
-                lerpColorNgiht.start();
+                lerpColorNight.start();
                 break;
             case DAY:
                 Tween lerpColorDay = new Tween(1.5f) {

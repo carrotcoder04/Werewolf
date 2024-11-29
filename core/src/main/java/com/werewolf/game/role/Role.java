@@ -14,7 +14,6 @@ public class Role {
     }
     private void setInfo(RoleInfo info){
         this.info = info;
-
     }
     protected void showRoleInfo() {
         System.out.println(info);
@@ -51,10 +50,14 @@ public class Role {
                 return new Witch();
             case DOCTOR:
                 return new Doctor();
+            case BODYGUARD:
+                return new BodyGuard();
             case LOUD_MOUTH:
                 return new LoudMounth();
             case WEREWOLF:
                 return new WereWolf();
+            case ALPHA_WEREWOLF:
+                return new AlphaWereWolf();
             case SHADOW_WOLF:
                 return new ShadowWolf();
             case JUNIOR_WEREWOLF:

@@ -93,6 +93,43 @@ public class RoomMessageHandler extends ClientMessageHandler {
                     RoomScreen.getInstance().setInfoText(message);
                 });
                 break;
+            case MessageTag.VOTE:
+            {
+                Player voter = PlayerBoard.getInstance().getSlot(reader.nextByte()).getPlayer();
+                Player target = PlayerBoard.getInstance().getSlot(reader.nextByte()).getPlayer();
+                int numVotes = reader.nextByte();
+                InvokeOnMainThread.invoke(() -> {
+                    voter.vote(target);
+                    target.getMySlot().setNumVote(numVotes);
+                });
+                break;
+            }
+            case MessageTag.UN_VOTE:
+            {
+                Player voter = PlayerBoard.getInstance().getSlot(reader.nextByte()).getPlayer();
+                Player target = PlayerBoard.getInstance().getSlot(reader.nextByte()).getPlayer();
+                int numVotes = reader.nextByte();
+                InvokeOnMainThread.invoke(() -> {
+                    voter.unVote();
+                    target.getMySlot().setNumVote(numVotes);
+                });
+                break;
+            }
+            case MessageTag.SET_CAN_VOTE:
+            {
+                Player.getMainPlayer().setCanVote(reader.nextByte() == 1);
+                break;
+            }
+            case MessageTag.SET_CAN_CHAT:
+            {
+                Player.getMainPlayer().setCanChat(reader.nextByte() == 1);
+                break;
+            }
+            case MessageTag.SET_ALIVE:
+            {
+                Player player = PlayerBoard.getInstance().getSlot(reader.nextByte()).getPlayer();
+                player.setAlive(reader.nextByte() == 1);
+            }
         }
     }
     @Override

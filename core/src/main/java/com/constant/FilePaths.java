@@ -24,6 +24,8 @@ public class FilePaths {
     public static final String ROBOTO_ITALIC = "Font/Roboto-Italic.ttf";
     public static final String ROBOTO_REGULAR = "Font/Roboto-Regular.ttf";
     public static final String ROLE_PANEL = "Skin/ScrollPane/role_panel.json";
+    public static final String HAND_VOTE = "vote_day.png";
+    public static final String VOTE_TARGET = "vote_day_voter_skin_2.png";
     private static final String[] ASSETS_PATHS;
     static {
         FileHandle assets = Gdx.files.internal("assets.txt");

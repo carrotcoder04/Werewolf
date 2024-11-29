@@ -67,11 +67,12 @@ public class BoxChat {
             public boolean keyDown(InputEvent event, int keycode) {
                 if (keycode == Input.Keys.ENTER) {
                     String text = chatText.getText();
-                    if(!text.isEmpty()) {
+                    Player player = Player.getMainPlayer();
+                    if(!text.isEmpty() && player.canChat()) {
                         Writer writer = new Writer();
                         writer.writeString(text);
                         Client.getInstance().send(MessageTag.CHAT,writer);
-                        addText(Player.getMainPlayer(), text);
+                        addText(player, text);
                         chatText.setText("");
                     }
                 }
