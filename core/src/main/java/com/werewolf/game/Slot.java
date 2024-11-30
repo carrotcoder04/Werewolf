@@ -46,6 +46,9 @@ public class Slot {
         });
     }
     private void onClick() {
+        if(player == null) {
+            return;
+        }
         Player.getMainPlayer().selectPlayer(player);
     }
     private void initBackground() {

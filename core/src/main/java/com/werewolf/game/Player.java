@@ -147,16 +147,6 @@ public class Player {
         getMySlot().unVote();
     }
     public void selectPlayer(Player player) {
-
-        if (!canVote) {
-            return;
-        }
-        if (player.isMainPlayer()) {
-            return;
-        }
-        if (!player.isAlive()) {
-            return;
-        }
         Writer writer = new Writer(5);
         writer.writeByte((byte) player.getId());
         Client.getInstance().send(MessageTag.SELECT_PLAYER, writer);
