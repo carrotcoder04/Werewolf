@@ -8,7 +8,9 @@ import com.network.clientstate.handler.ClientMessageHandler;
 import com.serialization.Serializable;
 
 import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.Socket;
+import java.net.URL;
 import java.util.concurrent.CompletableFuture;
 
 
@@ -24,7 +26,8 @@ public class Client {
     }
     public void connect() {
         try {
-            socket = new Socket(NetworkConfig.IP_SERVER,NetworkConfig.PORT );
+            String serverIp = getServerIp();
+            socket = new Socket(serverIp,NetworkConfig.PORT );
             in = new DataInputStream(socket.getInputStream());
             out = new DataOutputStream(socket.getOutputStream());
             CompletableFuture.runAsync(this::readLoop);
@@ -34,6 +37,29 @@ public class Client {
             e.printStackTrace();
             disconnect();
         }
+    }
+    private String getServerIp() {
+        try {
+            String url = "https://carrotcoder04.github.io/API/server.txt";
+            URL obj = new URL(url);
+            HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
+            connection.setRequestMethod("GET");
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String inputLine;
+                StringBuilder response = new StringBuilder();
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+                return response.toString();
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
     private void readLoop() {
         while (true) {
