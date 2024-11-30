@@ -72,7 +72,6 @@ public class BoxChat {
                         Writer writer = new Writer();
                         writer.writeString(text);
                         Client.getInstance().send(MessageTag.CHAT,writer);
-                        addText(player, text);
                         chatText.setText("");
                     }
                 }
